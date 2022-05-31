@@ -1,18 +1,46 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import React from 'react'
+import React, { useEffect } from 'react'
 import SafeAreaView from '../SafeAreaView';
 import Position from 'react-native/Libraries/Components/Touchable/Position';
 // import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import { firebase, db } from '../../firebase'
+
+
+const handleSignOut = async () => {
+  try {
+    firebase.auth().signOut()
+    console.log('Signing out')
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const Header = () => {
+
+  const getUserName = () => {
+    const user = firebase.auth().currentUser
+    const unsubscribe = db.collection('users').where('owner_uid', '===', user.uid).limit(1).onSnapshot(
+      snapshot => snapshot.docs.map(doc => {
+        setCurrentLoggedInUser({
+          username: doc.data().username
+        })
+      })
+    )
+    return unsubscribe
+  }
+
+  useEffect(() => {
+    getUserName()
+  },[])
+
   return (
     <SafeAreaView >
       <View style={styles.conatiner}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSignOut}>
           <Image style={styles.logo} source={require('../../Assets/dtu-logo.jpg')} />
         </TouchableOpacity>
 
-        <Text style={styles.name}>Sarthak Sanwal</Text>
+        <Text style={styles.name}>Test User 1</Text>
 
         <View style={styles.iconsConatiner}>
           <TouchableOpacity>

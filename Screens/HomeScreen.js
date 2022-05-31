@@ -1,11 +1,14 @@
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Components/Home/Header'
 import Courses from '../Components/Home/Courses'
 import Schedule from '../Components/Home/Schedule'
 import BottomTab, { bottomTabIcons } from '../Components/Home/BottomTab'
+import { db } from '../firebase'
 
 const HomeScreen = ({navigation}) => {
+
+
   return (
     <SafeAreaView style={styles.container}>
       <Header></Header>

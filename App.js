@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
-import SignedInStack from "./Navigation";
-import HomeScreen from "./Screens/HomeScreen";
+import AuthNavigation from "./AuthNavigation";
+import LoadingScreen from "./LoadingScreen";
 
 export default function App() {
-  return <SignedInStack/>
+  return <AuthNavigation/>
   // return (
-  //   <HomeScreen/>
+  //   <LoadingScreen/>
   // )
 }

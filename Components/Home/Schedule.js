@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { DAILYSCHEDULE } from '../../Data/DailySchedule'
+import { db } from '../../firebase'
 
 const Schedule = () => {
     const [currentDate, setcurrentDate] = useState('')
@@ -14,6 +15,14 @@ const Schedule = () => {
         setcurrentDate(
             date + ' ' + monthNames[month] + ', ' + dayNames[day]
         )
+    }, [])
+
+    const [schedule, setSchedule] = useState([])
+
+    useEffect(() => {
+        db.collectionGroup('schedule').onSnapshot(snapshot => {
+            setSchedule(snapshot.docs.map(doc => doc.data()))
+        })
     }, [])
 
     return (

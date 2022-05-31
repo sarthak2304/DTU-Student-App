@@ -9,6 +9,7 @@ import Subject_2 from './Screens/Subjects/Subject_2'
 import Subject_3 from './Screens/Subjects/Subject_3'
 import Subject_4 from './Screens/Subjects/Subject_4'
 import Subject_5 from './Screens/Subjects/Subject_5'
+import LoginScreen from './Screens/LoginScreen'
 
 const Stack = createStackNavigator()
 
@@ -16,7 +17,7 @@ const screenOptions = {
     headerShown : false,
 }
 
-const SignedInStack = () => (
+export const SignedInStack = () => (
     <NavigationContainer>
         <Stack.Navigator initialRouteName='HomeScreen' screenOptions={screenOptions}>
             <Stack.Screen name='HomeScreen' component={HomeScreen}/>
@@ -30,5 +31,10 @@ const SignedInStack = () => (
     </NavigationContainer>
 )
 
-
-export default SignedInStack
+export const SignedOutStack = () => (
+    <NavigationContainer>
+        <Stack.Navigator initialRouteName='LoginScreen' screenOptions={screenOptions}>
+            <Stack.Screen name='LoginScreen' component={LoginScreen}/>
+        </Stack.Navigator>
+    </NavigationContainer>
+)
